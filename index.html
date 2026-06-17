@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCSO Medical Assistance Portal</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-bg">
+
+  <div id="view-login" class="view-container active">
+    <div class="header-section">
+      <h1 class="header-title">Medical Assistance Application</h1>
+      <p class="header-subtitle">Philippine Charity Sweepstakes Office</p>
+    </div>
+    <div class="form-wrapper auth-box">
+      <h1 class="form-main-title">Portal Login</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn" style="width:100%;">Sign In</button>
+        <p style="text-align:center; margin-top:15px; font-size:14px;">
+          Don't have an account? <a href="#" onclick="switchView('view-register')">Register Profile Here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="view-register" class="view-container">
+    <div class="form-wrapper">
+      <h1 class="form-main-title">Register Patient Account</h1>
+      <form id="registerForm">
+        
+        <div class="form-section-block">
+          
+          <h2 class="form-subtitle">Account Credentials</h2>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-section-block">
+          <h2 class="form-subtitle">Patient Profile Data</h2>
+          
+          <div class="form-group">
+            <label for="Pname">Full Name</label>
+            <input type="text" id="Pname" name="Pname" class="form-control" placeholder="e.g. Juan F. Dela Cruz" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="Addr">Full Address</label>
+            <input type="text" id="Addr" name="Addr" class="form-control" placeholder="e.g. Quezon City" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="Bdate">Birth Date</label>
+            <input type="date" id="Bdate" name="Bdate" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="CivStats">Civil Status</label>
+            <select id="CivStats" name="CivStats" class="form-control" required>
+              <option value="" disabled hidden selected>Select Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Widow">Widow</option>
+              <option value="Separated">Separated</option>
+              <option value="Common-Law Partner">Common-Law Partner</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="sex" class="form-control" required>
+              <option value="" disabled hidden selected>Select Sex</option>
+              <option value="M">M</option>
+              <option value="F">F</option></select>
+          </div>
+          
+          <div class="form-group">
+            <label for="religion">Religion</label>
+            <input type="text" id="religion" name="religion" placeholder="e.g. Roman Catholic" class="form-control">
+          </div>
+          
+          <div class="form-group">
+            <label for="education">Educational Attainment</label>
+            <select id="education" name="education" class="form-control" required>
+              <option value="" disabled hidden selected>Select Level</option>
+              <option value="None">None</option>
+              <option value="Elementary">Elementary</option>
+              <option value="High School">High School</option>
+              <option value="College">College</option>
+              <option value="Post-Graduate">Post-Graduate</option>
+              <option value="Vocational">Vocational</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="job">Job</label>
+            <input type="text" id="job" name="job" class="form-control" placeholder="e.g. Construction Worker, Unemployed" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="salary">Monthly Income</label>
+            <input type="number" id="salary" name="salary" class="form-control" placeholder="e.g. 15000" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="philhealth">PhilHealth Membership Status</label>
+            <select id="philhealth" name="philhealth" class="form-control" required>
+              <option value="" disabled hidden selected>Select Status</option>
+              <option value="Member">Member</option>
+              <option value="Non-Member">Non-Member</option>
+              <option value="Dependent">Dependent</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-section-block">
+          <h2 class="form-subtitle">Relative Information</h2>
+          <div id="relatives-dynamic-container"></div>
+          <button type="button" class="btn btn-add-item" onclick="addNewRelativeEntry()">+ Add Relative Card</button>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="switchView('view-login')">Back to Login</button>
+          <button type="submit" class="btn">Create Profile & Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="view-landing" class="view-container">
+    <div class="form-wrapper auth-box" style="max-width:500px;">
+      <h1 class="form-main-title">File Assistance Request</h1>
+      <div style="background:#eef2f7; padding:15px; border-radius:5px; margin-bottom:20px; text-align:center;">
+        <span style="font-size:14px; color:#555;">Logged in as:</span><br>
+        <strong style="color: #0984e3; font-size:18px;" id="welcome-message">ID</strong>
+      </div>
+      
+      <form id="assistanceRequestForm">
+        <div class="form-group">
+          <label for="diagnosis">Patient Diagnosis</label>
+          <input type="text" id="diagnosis" name="diagnosis" class="form-control" placeholder="e.g. Osteoarthritis" required>
+        </div>
+        <div class="form-group">
+          <label for="request">Nature of Requested Assistance</label>
+          <select id="request" class="form-control" name="request" onchange="toggleRequestDetails()" required>
+            <option value="" disabled hidden selected>Select an option...</option>
+            <option value="Confinement">Confinement</option>
+            <option value="Dialysis">Dialysis</option>
+            <option value="Chemotherapy">Chemotherapy</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Surgical Supplies">Surgical Supplies</option>
+            <option value="Implant">Implant</option>
+            <option value="Laboratory/Diagnostic Procedures">Laboratory/Diagnostic Procedures</option>
+            <option value="Medical Devices">Medical Devices</option>
+            <option value="Assistive Devices">Assistive Devices</option>
+            <option value="Non & Minimally Invasive Procedures">Non & Minimally Invasive Procedures</option>
+            <option value="Transplant">Transplant</option>
+            <option value="Rehabilitative Therapy">Rehabilitative Therapy</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div class="form-group" id="requestDetails" style="display: none;">
+              <label>Please specify:</label>
+              <input type="text" class="form-control" id="otherRequest" name="otherRequest">
+        </div>
+        <button type="submit" class="btn" style="width:100%; margin-top:15px;">Submit Request</button>
+        <button type="button" class="btn btn-secondary" style="width:100%; margin-top:10px;" onclick="logoutUser()">Log Out</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="view-submitted" class="view-container">
+    <div class="form-wrapper auth-box" style="text-align: center;">
+      <h1 class="success-title" style="color: #00b894;">Request Filed!</h1>
+      <p>Your medical application request has been sent</p>
+      <button class="btn" style="margin-top:25px; width:100%;" onclick="switchView('view-landing')">File Another Request</button>
+      <button type="button" class="btn btn-secondary" style="width:100%; margin-top:10px;" onclick="logoutUser()">Log Out</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
