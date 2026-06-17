@@ -67,14 +67,22 @@ function validateInput(input) {
     if (name === 'Pname' || name === 'relativeName[]') {
         if (val.length < 5) return showError(input, "Please input your full name");
         if (!val.includes(" ")) return showError(input, "Please input your full name.");
-        if (!/^[a-zA-Z\s]+$/.test(val)) return showError(input, "Please input your full name");
+        if (!/^[a-zA-Z.\s]+$/.test(val)) return showError(input, "Please input your full name");
     }
     if (name === 'Addr') {
         if (val.length < 5 || !val.includes(" ")) return showError(input, "Please enter a valid address.");
     }
-    if (name === 'job' || name === 'religion' || name === 'relPatient[]' || name === 'relJob[]') {
+    if (name === 'job' ||  name === 'relJob[]') {
+        if (val.length > 0 && val.length < 3) return showError(input, "Please enter a valid job.");
+        if (val.length > 0 && !/^[a-zA-Z\s]+$/.test(val)) return showError(input, "Please enter a valid job.");
+    }
+    if (name === 'religion') {
         if (val.length > 0 && val.length < 3) return showError(input, "Please enter a valid religion.");
         if (val.length > 0 && !/^[a-zA-Z\s]+$/.test(val)) return showError(input, "Please enter a valid religion.");
+    }
+    if (name === 'relPatient[]') {
+        if (val.length > 0 && val.length < 3) return showError(input, "Please enter a valid relation to patient.");
+        if (val.length > 0 && !/^[a-zA-Z\s]+$/.test(val)) return showError(input, "Please enter a valid relation to patient.");
     }
     if (name === 'salary' || name === 'relIncome[]') {
         if (isNaN(val) || Number(val) < 0) return showError(input, "Income must be 0 or greater");
