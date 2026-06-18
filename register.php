@@ -37,11 +37,16 @@ if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $pass)) {
 }
 
 // 2. Patient Data (Using trim() to strip sneaky spaces)
-$pNameClean = trim($Pname);
-if (strlen($pNameClean) < 5 || !preg_match('/^[a-zA-Z\s]+$/', $pNameClean) || strpos($pNameClean, ' ') === false) {
-    http_response_code(400); die("Patient Name must be at least 5 characters, text only, and contain a space.");
-}
+$pNameClean = trim($Pname); // <-- This is the only line you needed to add!
 
+if (
+    strlen($pNameClean) < 5 ||
+    !preg_match('/^[a-zA-Z.\s]+$/', $pNameClean) || 
+    strpos($pNameClean, ' ') === false 
+) {
+    http_response_code(400);
+    die("Patient Name must contain a valid full name.");
+}
 $addrClean = trim($Addr);
 if (strlen($addrClean) < 5 || strpos($addrClean, ' ') === false) {
     http_response_code(400); die("Address must contain a space and be valid.");
@@ -67,9 +72,14 @@ if (is_array($relName) && count($relName) > 0) {
         if (empty($relName[$i])) continue;
         
         $rNameClean = trim($relName[$i]);
-        if (strlen($rNameClean) < 5 || !preg_match('/^[a-zA-Z\s]+$/', $rNameClean) || strpos($rNameClean, ' ') === false) {
-            http_response_code(400); die("Relative Name must be at least 5 chars, text only, and contain a space.");
-        }
+        if (
+            strlen($rNameClean) < 5 ||
+            !preg_match('/^[a-zA-Z.\s]+$/', $rNameClean) || 
+            strpos($rNameClean, ' ') === false 
+        ) {
+            http_response_code(400);
+            die("Relative Name must contain a valid full name.");
+            }
         if (intval($relAge[$i]) < 18) {
             http_response_code(400); die("Relative Age must be 18 or older.");
         }
