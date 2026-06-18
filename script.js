@@ -69,8 +69,10 @@ function validateInput(input) {
     }
 
     if (name === 'Addr') {
-        if (val.length < 5 || !val.includes(" ")) return showError(input, "Please enter a valid address.");
+    if (val.length < 5 || !/^[a-zA-Z0-9\s#,\-\.\/']+$/.test(val)) {
+        return showError(input, "Please enter a valid address.");
     }
+}
 
     if (name === 'job' ||  name === 'relJob[]') {
         if (val.length > 0 && val.length < 3) return showError(input, "Please enter a valid job.");
