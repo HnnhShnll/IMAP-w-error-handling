@@ -49,8 +49,9 @@ if (
 }
 
 $addrClean = trim($Addr);
-if (strlen($addrClean) < 5 || strpos($addrClean, ' ') === false) {
-    http_response_code(400); die("Address must contain a space and be valid.");
+if (strlen($addrClean) < 5 || !preg_match('/^[a-zA-Z0-9\s#,\-\.\/]+$/', $addrClean)) {
+    http_response_code(400); 
+    die("Address must be at least 5 characters and contain valid address characters.");
 }
 
 $religClean = trim($religion);
